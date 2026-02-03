@@ -170,10 +170,10 @@ Compute the points $p_0$, $p_1$, $p_2$, and $p_3$.
 #| size: "scriptsize"
 #| code-fold: FALSE
 
-(p_0 = c(0,0))
-(p_1 = basis.vector.1)
-(p_2 = basis.vector.1 + basis.vector.2)
-(p_3 = basis.vector.2)
+(p0 = c(0,0))
+(p1 = basis.vector.1)
+(p2 = basis.vector.1 + basis.vector.2)
+(p3 = basis.vector.2)
 
 ```
 
@@ -191,14 +191,10 @@ Copy and paste the code for the unit square. Edit the code to draw the segments 
 #| fig-align: "center"
 #| size: "scriptsize"
 ggplot() +
-  geom_segment(aes(x = 0, xend = 1,
-                   y=0, yend = 5))+
-  geom_segment(aes(x = 1, xend = -6,
-                   y=5, yend = 14))+
-  geom_segment(aes(x = -6, xend = -7,
-                   y=14, yend = 9))+
-  geom_segment(aes(x = -7, xend = 0,
-                   y=9, yend = 0)) +
+  geom_segment(aes(x = p0[1], y = p0[2], xend = p1[1], yend = p1[2])) +
+  geom_segment(aes(x = p1[1], y = p1[2], xend = p2[1], yend = p2[2])) +
+  geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2])) +
+  geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2])) +
   theme_bw() + 
   xlim(-10, 10)+
   ylim(-2, 17)+
@@ -256,11 +252,45 @@ Create `basis.vector.1` (first column of `T`) and `basis.vector.2` (second colum
 (basis.vector.1 = T[,1])
 (basis.vector.2 = T[,2])
 ```
+
 ## Part d
 Compute the points $p_0$, $p_1$, $p_2$, and $p_3$.
 
+**Solution**
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+
+(p0 = c(0,0))
+(p1 = basis.vector.1)
+(p2 = basis.vector.1+basis.vector.2)
+(p3 = basis.vector.2)
+```
+
 ## Part e
 Copy and paste the code for plotting the unit square. Edit the code to draw the segments that form the boundary based on the points in Part d.
+
+**Solution**
+
+```{r}
+#| label: fig-matrixT2
+#| fig-cap: "Matrix T (ver. 2) on a Graph."
+#| fig-width: 3
+#| fig-height: 3
+#| scale: "80%"
+#| fig-align: "center"
+#| size: "scriptsize"
+ggplot() +
+  geom_segment(aes(x = p0[1], y = p0[2], xend = p1[1], yend = p1[2])) +
+  geom_segment(aes(x = p1[1], y = p1[2], xend = p2[1], yend = p2[2])) +
+  geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2])) +
+  geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2])) +
+  theme_bw() + 
+  xlim(-1, 5)+
+  ylim(-1, 7)+
+  labs(x = "x", 
+       y = "y")
+```
 
 ## Part f
 Interestingly, the determinant of $\mathbf{A}$ gives us the area of the shape plotted in Part e. Find the determinant of $\mathbf{A}$.
