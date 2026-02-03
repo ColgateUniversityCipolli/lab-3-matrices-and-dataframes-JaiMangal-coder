@@ -313,12 +313,50 @@ A shear transformation is implemented by altering the basis vectors we start wit
 $$\mathbf{M}_v = \begin{bmatrix} 1 & k \\ 0 & 1 \end{bmatrix}$$
 and for horizontal slanting
 $$\mathbf{M}_h = \begin{bmatrix} 1 & 0 \\ k & 1 \end{bmatrix}.$$
+
 In both cases, $k \in \mathbb{R}$ is called a shear factor and its sign determines the direction of the slant and its magnitude determines the severity of the slant.
 
 ## Part a
 Use the following to generate a new shape. Compare the shape and its area to your answer in Question 1.
+
 $$\mathbf{M}_v = \begin{bmatrix} 1 & k=0.5 \\ 0 & 1 \end{bmatrix} ~~~~~ \textrm{and} ~~~~~
   \mathbf{A}   = \begin{bmatrix} 1 & -7 \\ 5 & 9 \end{bmatrix}$$
+
+**Solution**
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+(Mv = matrix(c(1,0,0.5,1),2,2))
+(A = matrix(c(1,5,-7,9),2,2))
+
+(T = A%*%Mv)
+(p0 = c(0,0))
+(p1 = T[,1])
+(p2 = T[,1]+T[,2])
+(p3 = T[,2])
+
+#| label: fig-matrix3.1
+#| fig-cap: "Matrix 3.1 on a Graph."
+#| fig-width: 3
+#| fig-height: 3
+#| scale: "80%"
+#| fig-align: "center"
+#| size: "scriptsize"
+ggplot() +
+  geom_segment(aes(x = p0[1], y = p0[2], xend = p1[1], yend = p1[2])) +
+  geom_segment(aes(x = p1[1], y = p1[2], xend = p2[1], yend = p2[2])) +
+  geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2])) +
+  geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2])) +
+  theme_bw() + 
+  xlim(-1, 5)+
+  ylim(-1, 7)+
+  labs(x = "x", 
+       y = "y")
+
+(det(A))
+```
+
+
 
 ## Part b
 Use the following to generate a new shape. Compare the shape and its area to your answer in Questions 1 and the vertical shear transform in part (a).
