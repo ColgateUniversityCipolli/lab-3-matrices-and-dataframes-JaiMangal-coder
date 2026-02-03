@@ -116,19 +116,65 @@ $$\mathbf{M} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}.$$
 # Question 1
 Let's transform $\mathbf{M}$ to demonstrate an interesting linear algebra property.
 
+**Solution**
+
+We first need to make Matrix M:
+
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+# I'm going to annoy you with using only by column
+(M = matrix(c(1,0,0,1),2,2)) 
+```
+
 ## Part a
 Create the matrix `A` in `R`.
 $$\mathbf{A} = \begin{bmatrix} 1 & -7 \\ 5 & 9 \end{bmatrix}$$
+
+**Solution**
+Matrix A:
+
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+
+(A = matrix(c(1,5,-7,9),2,2))
+```
 
 ## Part b
 Compute the product below in `R` and store it in an object `T`.
 $$\mathbf{T} = \mathbf{A}\mathbf{M}.$$
 
+**Solution**
+
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+
+(T = A%*%M)
+```
+
 ## Part c
 Create `basis.vector.1` (first column of `T`) and `basis.vector.2` (second column of `T`) in `R`.
 
+```{r}
+(basis.vector.1 = T[,1])
+(basis.vector.2 = T[,2])
+
+```
+
 ## Part d
 Compute the points $p_0$, $p_1$, $p_2$, and $p_3$.
+
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+
+(p_0 = c(0,0))
+(p_1 = basis.vector.1)
+(p_2 = basis.vector.1 + basis.vector.2)
+(p_3 = basis.vector.2)
+```
 
 ## Part e
 Copy and paste the code for the unit square. Edit the code to draw the segments that form the boundary based on the points in Part d.
