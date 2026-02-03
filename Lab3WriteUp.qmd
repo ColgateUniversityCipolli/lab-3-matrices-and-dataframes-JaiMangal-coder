@@ -197,7 +197,7 @@ ggplot() +
   geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2])) +
   theme_bw() + 
   xlim(-10, 10)+
-  ylim(-2, 17)+
+  ylim(0, 20)+
   labs(x = "x", 
        y = "y")
 ```
@@ -286,8 +286,8 @@ ggplot() +
   geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2])) +
   geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2])) +
   theme_bw() + 
-  xlim(-1, 5)+
-  ylim(-1, 7)+
+  xlim(-10, 10)+
+  ylim(0, 20)+
   labs(x = "x", 
        y = "y")
 ```
@@ -323,6 +323,7 @@ $$\mathbf{M}_v = \begin{bmatrix} 1 & k=0.5 \\ 0 & 1 \end{bmatrix} ~~~~~ \textrm{
   \mathbf{A}   = \begin{bmatrix} 1 & -7 \\ 5 & 9 \end{bmatrix}$$
 
 **Solution**
+
 ```{r}
 #| size: "scriptsize"
 #| code-fold: FALSE
@@ -330,11 +331,14 @@ $$\mathbf{M}_v = \begin{bmatrix} 1 & k=0.5 \\ 0 & 1 \end{bmatrix} ~~~~~ \textrm{
 (A = matrix(c(1,5,-7,9),2,2))
 
 (T = A%*%Mv)
+
 (p0 = c(0,0))
 (p1 = T[,1])
 (p2 = T[,1]+T[,2])
 (p3 = T[,2])
+```
 
+```{r}
 #| label: fig-matrix3.1
 #| fig-cap: "Matrix 3.1 on a Graph."
 #| fig-width: 3
@@ -343,19 +347,19 @@ $$\mathbf{M}_v = \begin{bmatrix} 1 & k=0.5 \\ 0 & 1 \end{bmatrix} ~~~~~ \textrm{
 #| fig-align: "center"
 #| size: "scriptsize"
 ggplot() +
-  geom_segment(aes(x = p0[1], y = p0[2], xend = p1[1], yend = p1[2])) +
-  geom_segment(aes(x = p1[1], y = p1[2], xend = p2[1], yend = p2[2])) +
-  geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2])) +
-  geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2])) +
+  geom_segment(aes(x = p0[1], y = p0[2], xend = p1[1], yend = p1[2]))+
+  geom_segment(aes(x = p1[1], y = p1[2], xend = p2[1], yend = p2[2]))+
+  geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2]))+
+  geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2]))+
   theme_bw() + 
-  xlim(-1, 5)+
-  ylim(-1, 7)+
+  xlim(-10, 10)+
+  ylim(0, 20)+
   labs(x = "x", 
        y = "y")
 
 (det(A))
 ```
-
+Here we see that the area is the same, as the determinant remains as 44. However, we see that the shape is pulled vertically up by a significant amount. As it is pulled up it seems it narrows in width. 
 
 
 ## Part b
@@ -363,10 +367,85 @@ Use the following to generate a new shape. Compare the shape and its area to you
 $$ \mathbf{M}_h = \begin{bmatrix} 1 & 0 \\ k=0.5 & 1 \end{bmatrix}~~~~~ \textrm{and} ~~~~~
   \mathbf{A}   = \begin{bmatrix} 1 & -7 \\ 5 & 9 \end{bmatrix}$$
 
+**Solution**
+
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+(Mh = matrix(c(1,0.5,0,1),2,2))
+(A = matrix(c(1,5,-7,9),2,2))
+
+(T = A%*%Mh)
+
+(p0 = c(0,0))
+(p1 = T[,1])
+(p2 = T[,1]+T[,2])
+(p3 = T[,2])
+```
+```{r}
+#| label: fig-matrix3.2
+#| fig-cap: "Matrix 3.2 on a Graph."
+#| fig-width: 3
+#| fig-height: 3
+#| scale: "80%"
+#| fig-align: "center"
+#| size: "scriptsize"
+ggplot() +
+  geom_segment(aes(x = p0[1], y = p0[2], xend = p1[1], yend = p1[2]))+
+  geom_segment(aes(x = p1[1], y = p1[2], xend = p2[1], yend = p2[2]))+
+  geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2]))+
+  geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2]))+
+  theme_bw() + 
+  xlim(-10, 10)+
+  ylim(0, 20)+
+  labs(x = "x", 
+       y = "y")
+
+(det(A))
+```
+Here, we once again see the area to be the same, but as compared to the shape in Question 1 and in Part 3a, the parallelogram is much skinnier, almost resembling a rhombus. The shape has been squished more horizontally, which has also made it increase in height as well relative to the Question 1 shape. 
+
 ## Part c
 Can we shear vertically and horizontally at the same time? Use the following to generate a new shape. Compare the shape and its area to your answers in parts (a) and (b).
 $$\mathbf{M}_{vh} = \begin{bmatrix} 1 & k=0.5 \\ k=0.5 & 1 \end{bmatrix} ~~~~~ \textrm{and} ~~~~~
   \mathbf{A}   = \begin{bmatrix} 1 & -7 \\ 5 & 9 \end{bmatrix}$$
+
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+(Mvh = matrix(c(1,0.5,0.5,1),2,2))
+(A = matrix(c(1,5,-7,9),2,2))
+
+(T = A%*%Mvh)
+
+(p0 = c(0,0))
+(p1 = T[,1])
+(p2 = T[,1]+T[,2])
+(p3 = T[,2])
+```
+```{r}
+#| label: fig-matrix3.3
+#| fig-cap: "Matrix 3.3 on a Graph."
+#| fig-width: 3
+#| fig-height: 3
+#| scale: "80%"
+#| fig-align: "center"
+#| size: "scriptsize"
+ggplot() +
+  geom_segment(aes(x = p0[1], y = p0[2], xend = p1[1], yend = p1[2]))+
+  geom_segment(aes(x = p1[1], y = p1[2], xend = p2[1], yend = p2[2]))+
+  geom_segment(aes(x = p2[1], y = p2[2], xend = p3[1], yend = p3[2]))+
+  geom_segment(aes(x = p3[1], y = p3[2], xend = p0[1], yend = p0[2]))+
+  theme_bw() + 
+  xlim(-10, 2)+
+  ylim(0, 22)+
+  labs(x = "x", 
+       y = "y")
+
+(det(A))
+```
+Here, the area is again the same, due to the invariant determinant. Comparing to parts a and b, this shape is much more tilted to the left, and is squished much more into a narrower shape. The left lean is much more prominent and we can see the shape being both suqished horizontally while also being stretched in the vertical direction. 
+
 
 # Question 4
 
@@ -386,6 +465,14 @@ Create a data frame `ladder` with the following data. Note your data frame shoul
 | 0    | 6    |    5 | 1    | 16   |    5 |
 | 1    | 6    |    5 | 0    | 18   |    5 |
 | 0    | 8    |    5 | 1    | 18   |    5 |
+
+
+```{r}
+#| size: "scriptsize"
+#| code-fold: FALSE
+
+df = data.frame("x"= c(222), "y"=c(000), "group" = c(111))
+```
 
 ## Part b
 Remove `#|eval: false` in the code below. The result should look like a ladder and a very rectangular house if part a is correct.
