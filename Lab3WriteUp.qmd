@@ -124,7 +124,7 @@ We first need to make Matrix M:
 #| size: "scriptsize"
 #| code-fold: FALSE
 # I'm going to annoy you with using only by column
-(M = matrix(c(1,0,0,1),2,2)) 
+(M = matrix(c(1,0,0,1),nrow = 2,ncol = 2)) 
 ```
 
 ## Part a
